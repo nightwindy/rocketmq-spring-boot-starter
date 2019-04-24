@@ -1,0 +1,11 @@
+notifications:
+  email:
+    recipients:
+      - night_windy@163.com
+
+language: java
+
+sudo: false
+script:
+  - travis_retry mvn -B clean
+  - travis_retry mvn -B package jacoco:report coveralls:report
