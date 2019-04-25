@@ -22,18 +22,8 @@ public abstract class AbstractMQTransactionProducer implements TransactionListen
 
     public void setProducer(TransactionMQProducer transactionProducer) {
         this.transactionProducer = transactionProducer;
-        this.executorService=executorService;
     }
-    //设置broker回查prodducer的并发数
-    ExecutorService executorService = new ThreadPoolExecutor(2, 5, 100, TimeUnit.SECONDS,
-            new ArrayBlockingQueue<Runnable>(2000), new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread thread = new Thread(r);
-            thread.setName("client-transaction-msg-check-thread");
-            return thread;
-        }
-    });
+
 
     @Override
     public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
