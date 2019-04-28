@@ -84,18 +84,22 @@ public class MQConsumerAutoConfiguration extends MQBaseAutoConfiguration {
         }
         Environment environment = applicationContext.getEnvironment();
 
+        //获取property 注解名为consumerGroup k 的内容v
         String consumerGroup = environment.resolvePlaceholders(mqConsumer.consumerGroup());
         String topic = environment.resolvePlaceholders(mqConsumer.topic());
         String tags = "*";
         if(mqConsumer.tag().length == 1) {
             tags = environment.resolvePlaceholders(mqConsumer.tag()[0]);
         } else if(mqConsumer.tag().length > 1) {
+            //// 表示订阅TAG为AAA和BBB的消息，如果传 * ,表示订阅该Topic的所有消息
+            //consumer.subscribe("TopicTest", "AAA||BBB");
             tags = StringUtils.join(mqConsumer.tag(), "||");
         }
 
         // 检查consumerGroup
         if(!StringUtils.isEmpty(validConsumerMap.get(consumerGroup))) {
             String exist = validConsumerMap.get(consumerGroup);
+            //设置为 单一消费  所以排除这种情况 consumerGroup topic + "-" + tags
             throw new RuntimeException("消费组重复订阅，请新增消费组用于新的topic和tag组合: " + consumerGroup + "已经订阅了" + exist);
         } else {
             validConsumerMap.put(consumerGroup, topic + "-" + tags);
