@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.windy.starter.mq.config.MQBaseAutoConfiguration,\
+com.windy.starter.mq.config.MQConsumerAutoConfiguration,\
+com.windy.starter.mq.config.MQProducerAutoConfiguration

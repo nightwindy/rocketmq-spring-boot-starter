@@ -33,7 +33,11 @@
     <groupId>com.windy</groupId>
     <artifactId>spring-boot-starter-rocketmq</artifactId>
     <version>1.0.0</version>
-
+    <scm>
+        <url>https://github.com/nightwindy/rocketmq-spring-boot-starter</url>
+        <connection>scm:git:git://github.com/nightwindy/rocketmq-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:git@github.com:nightwindy/rocketmq-spring-boot-starter.git</developerConnection>
+    </scm>
 
     <developers>
         <developer>
